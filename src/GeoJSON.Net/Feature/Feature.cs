@@ -33,6 +33,7 @@ namespace GeoJSON.Net.Feature
         public override GeoJSONObjectType Type => GeoJSONObjectType.Feature;
         
         [JsonProperty(PropertyName = "id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(FeatureIdConverter))]
         public string Id { get; }
         
         [JsonProperty(PropertyName = "geometry", Required = Required.AllowNull)]

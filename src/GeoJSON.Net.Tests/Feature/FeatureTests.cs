@@ -356,7 +356,32 @@ namespace GeoJSON.Net.Tests.Feature
             Assert.IsTrue(equal1);
             Assert.IsTrue(equal2);
         }
-        
+
+        [Test]
+        public void Feature_Id_Long_Serialize_Issue100()
+        {
+            var json = GetExpectedJson();
+
+            var feature = new Net.Feature.Feature(new Point(new Position(123, 12)), id: "123");
+
+            var result = JsonConvert.SerializeObject(feature);
+            
+            Assert.AreEqual(json, result);
+        }
+
+        [Test]
+        public void Feature_Id_Decimal_Serialize_Issue100()
+        {
+            var json = GetExpectedJson();
+
+            var feature = new Net.Feature.Feature(new Point(new Position(123, 12)), id: "123.56");
+
+            var result = JsonConvert.SerializeObject(feature);
+
+            Assert.AreEqual(json, result);
+        }
+
+
         private IGeometryObject GetGeometry()
         {
             var coordinates = new List<LineString>
